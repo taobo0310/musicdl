@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from .base import BaseMusicClient
 from rich.progress import Progress
 from urllib.parse import urljoin, urlparse
-from ..utils import legalizestring, usesearchheaderscookies, searchdictbykey, seconds2hms, safeextractfromdict, extractdurationsecondsfromlrc, cleanlrc, SongInfo, QuarkParser
+from ..utils import legalizestring, usesearchheaderscookies, searchdictbykey, seconds2hms, safeextractfromdict, extractdurationsecondsfromlrc, cleanlrc, SongInfo, QuarkParser, AudioLinkTester
 
 
 '''FiveSongMusicClient'''
@@ -21,12 +21,8 @@ class FiveSongMusicClient(BaseMusicClient):
     def __init__(self, **kwargs):
         super(FiveSongMusicClient, self).__init__(**kwargs)
         assert self.quark_parser_config.get('cookies'), f'{self.source}.__init__ >>> "quark_parser_config" is not configured, so the songs cannot be downloaded.'
-        self.default_search_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
-        }
-        self.default_download_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
-        }
+        self.default_search_headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+        self.default_download_headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
         self.default_headers = self.default_search_headers
         self._initsession()
     '''_constructsearchurls'''
@@ -44,22 +40,15 @@ class FiveSongMusicClient(BaseMusicClient):
         return search_urls
     '''_parsesearchresultsfromhtml'''
     def _parsesearchresultsfromhtml(self, html_text: str):
-        soup, base_url, search_results = BeautifulSoup(html_text, "html.parser"), "https://www.5song.xyz", []
+        soup, base_url, search_results = BeautifulSoup(html_text, "lxml"), "https://www.5song.xyz", []
         for li in soup.select("div.list ul > li"):
-            a = li.select_one("a[href]")
-            if not a: continue
-            href = a.get("href", "").strip()
-            detail_url = urljoin(base_url, href)
-            title_el = a.select_one("div.con div.t h3")
-            title = title_el.get_text(strip=True) if title_el else None
+            if not (a := li.select_one("a[href]")): continue
+            href = a.get("href", "").strip(); detail_url = urljoin(base_url, href)
+            title_el = a.select_one("div.con div.t h3"); title = title_el.get_text(strip=True) if title_el else None
             formats = [s.get_text(strip=True) for s in a.select("div.con div.t span") if s.get_text(strip=True)]
-            singer_el = a.select_one("div.singerNum div.singer")
-            date_el = a.select_one("div.singerNum div.date")
-            num_el = a.select_one("div.singerNum div.num")
-            singer = singer_el.get_text(strip=True) if singer_el else None
-            date = date_el.get_text(strip=True) if date_el else None
-            num = num_el.get_text(strip=True) if num_el else None
-            img = a.select_one("div.pic img")
+            singer_el = a.select_one("div.singerNum div.singer"); date_el = a.select_one("div.singerNum div.date"); num_el = a.select_one("div.singerNum div.num")
+            singer = singer_el.get_text(strip=True) if singer_el else None; date = date_el.get_text(strip=True) if date_el else None
+            num = num_el.get_text(strip=True) if num_el else None; img = a.select_one("div.pic img")
             cover_url = urljoin(base_url, img.get("src")) if img and img.get("src") else None
             search_results.append({"title": title, "formats": formats, "singer": singer, "date": date, "num": num, "detail_url": detail_url, "cover_url": cover_url})
         return search_results

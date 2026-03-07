@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from .base import BaseMusicClient
 from rich.progress import Progress
 from urllib.parse import urljoin, urlparse
-from ..utils import legalizestring, usesearchheaderscookies, seconds2hms, searchdictbykey, safeextractfromdict, SongInfo, QuarkParser
+from ..utils import legalizestring, usesearchheaderscookies, seconds2hms, searchdictbykey, safeextractfromdict, SongInfo, QuarkParser, AudioLinkTester
 
 
 '''FLMP3MusicClient'''
@@ -20,12 +20,8 @@ class FLMP3MusicClient(BaseMusicClient):
     def __init__(self, **kwargs):
         super(FLMP3MusicClient, self).__init__(**kwargs)
         assert self.quark_parser_config.get('cookies'), f'{self.source}.__init__ >>> "quark_parser_config" is not configured, so the songs cannot be downloaded.'
-        self.default_search_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
-        }
-        self.default_download_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
-        }
+        self.default_search_headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+        self.default_download_headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
         self.default_headers = self.default_search_headers
         self._initsession()
     '''_constructsearchurls'''
@@ -43,11 +39,9 @@ class FLMP3MusicClient(BaseMusicClient):
         return search_urls
     '''_parsesearchresultsfromhtml'''
     def _parsesearchresultsfromhtml(self, html_text: str):
-        soup = BeautifulSoup(html_text, "html.parser")
-        search_results, base_url = [], "https://flmp3.pro"
+        search_results, base_url, soup = [], "https://flmp3.pro", BeautifulSoup(html_text, "html.parser")
         for li in soup.select("div.list ul.flex.flex-wrap > li"):
-            a = li.select_one("a")
-            if not a: continue
+            if not (a := li.select_one("a")): continue
             song_href = a.get("href", ""); song_url = urljoin(base_url, song_href) if song_href else None; title_el = li.select_one("div.con div.t h3")
             artist_el = li.select_one("div.con div.t p"); date_el = li.select_one("div.con div.date"); img_el = li.select_one("div.pic img")
             search_results.append({"song_url": song_url, "title": title_el.get_text(strip=True) if title_el else None, "artist": artist_el.get_text(strip=True) if artist_el else None, "date": date_el.get_text(strip=True) if date_el else None, "img_url": img_el.get("src") if img_el else None, "img_alt": img_el.get("alt") if img_el else None})
