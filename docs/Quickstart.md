@@ -1,7 +1,6 @@
 # Quick Start
 
 This guide explains the most common ways to use musicdl in both the command line and Python.
-
 It is written for practical, day-to-day usage, so the focus is on the workflows most users need first: searching songs, choosing music sources, downloading playlists, saving files to custom folders, and passing cookies or request settings when needed.
 
 #### Typical Usage
