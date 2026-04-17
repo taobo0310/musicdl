@@ -8,7 +8,7 @@ This section explains how to use all music clients supported by musicdl, coverin
 
 [Bilibili Music](https://www.bilibili.com/audio/home/?type=9) is Bilibili’s dedicated audio platform, where users can discover, stream, and enjoy a wide variety of music, podcasts, and original audio content.
 
-We can use BilibiliMusicClient to download the music above.
+We can use BilibiliMusicClient to download music from the above music platform.
 
 BilibiliMusicClient requires no additional CLI tools such as ffmpeg or N_m3u8DL-RE. Just install musicdl via pip and it is ready to use out of the box.
 
@@ -53,7 +53,7 @@ BilibiliMusicClient requires no additional CLI tools such as ffmpeg or N_m3u8DL-
 
 [5SING Music](https://5sing.kugou.com/index.html) is a KuGou-affiliated online music platform where users can upload and discover original songs, covers, instrumentals, playlists, videos, and independent musicians.
 
-We can download the above music using FiveSingMusicClient.
+FiveSingMusicClient can be used to download music from the music platform mentioned above.
 
 Using FiveSingMusicClient does not require installing any extra command-line tools like ffmpeg or N_m3u8DL-RE. Simply run pip install musicdl and you can start using it right away.
 
@@ -133,7 +133,7 @@ Using FiveSingMusicClient does not require installing any extra command-line too
 
 [KuGou Music](http://www.kugou.com/) is a major Chinese online music platform that offers songs, charts, playlists, music videos, audiobooks, and live content.
 
-The music above can be downloaded with KugouMusicClient.
+Music from the above platform can be downloaded using KugouMusicClient.
 
 KugouMusicClient works out of the box with no need for extra CLI dependencies such as ffmpeg or N_m3u8DL-RE — all you need is pip install musicdl.
 
@@ -222,7 +222,7 @@ KugouMusicClient works out of the box with no need for extra CLI dependencies su
 
 [Kuwo Music](http://www.kuwo.cn/) is a major Chinese online music platform that offers high-quality music streaming, charts, playlists, radio, and downloadable songs.
 
-We can use KuwoMusicClient to download the track above.
+We can download music from the aforementioned platform with KuwoMusicClient.
 
 No additional command-line tools, including ffmpeg or N_m3u8DL-RE, are needed to use KuwoMusicClient. Installing musicdl with pip is enough to get started immediately.
 
@@ -300,7 +300,7 @@ No additional command-line tools, including ffmpeg or N_m3u8DL-RE, are needed to
 
 [Migu Music](https://music.migu.cn/v5/#/musicLibrary) is a Chinese music streaming platform that offers a large library of songs, albums, playlists, and other digital music content.
 
-You can use MiguMusicClient to download the music above.
+MiguMusicClient allows us to download music from the platform above.
 
 MiguMusicClient can be used directly without installing any extra CLI utilities like ffmpeg or N_m3u8DL-RE. Just install musicdl via pip and it is good to go.
 
@@ -378,7 +378,7 @@ MiguMusicClient can be used directly without installing any extra CLI utilities 
 
 [NetEase Cloud Music](https://music.163.com/) is one of China’s most popular music streaming platforms, known for its vast song library, personalized recommendations, and active user community.
 
-The above music can be downloaded through NeteaseMusicClient.
+NeteaseMusicClient makes it possible to download music from the above platform.
 
 There is no need to install extra tools such as ffmpeg or N_m3u8DL-RE to use NeteaseMusicClient. A simple pip install musicdl is all it takes.
 
@@ -456,7 +456,7 @@ There is no need to install extra tools such as ffmpeg or N_m3u8DL-RE to use Net
 
 [Qianqian Music](https://music.91q.com/) is an online music platform offering a large library of songs, popular playlists, artist content, and curated videos.
 
-We can rely on QianqianMusicClient to download the music above.
+We use QianqianMusicClient to download music from the above-mentioned platform.
 
 QianqianMusicClient comes ready to use without relying on additional CLI tools like ffmpeg or N_m3u8DL-RE. Just install musicdl through pip and you are all set.
 
@@ -534,7 +534,7 @@ QianqianMusicClient comes ready to use without relying on additional CLI tools l
 
 [QQ Music](https://y.qq.com/) is a high-quality music streaming platform offering a vast licensed song library, new releases, charts, playlists, MVs, and digital albums. 
 
-QQMusicClient can be used to download the music listed above.
+QQMusicClient enables music downloads from the platform mentioned above.
 
 To use QQMusicClient, you do not need any extra command-line tools such as ffmpeg or N_m3u8DL-RE. Once musicdl is installed with pip, it works immediately.
 
@@ -612,7 +612,7 @@ To use QQMusicClient, you do not need any extra command-line tools such as ffmpe
 
 
 
-We can use SodaMusicClient for downloading the music above.
+Music from the above-mentioned platform can be fetched using SodaMusicClient.
 
 SodaMusicClient offers an out-of-the-box experience: no extra CLI tools like ffmpeg or N_m3u8DL-RE are required, and pip install musicdl is all you need.
 
@@ -647,6 +647,8 @@ SodaMusicClient offers an out-of-the-box experience: no extra CLI tools like ffm
 
 
 #### StreetVoiceMusicClient
+
+To download music from the platform above, we can use StreetVoiceMusicClient.
 
 (1) Command-Line Usage
 
