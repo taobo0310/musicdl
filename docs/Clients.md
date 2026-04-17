@@ -452,13 +452,6 @@ There is no need to install extra tools such as ffmpeg or N_m3u8DL-RE to use Net
   music_client.download(song_infos=song_infos)
   ```
 
-
-
-
-
-
-
-
 #### QianqianMusicClient
 
 [Qianqian Music](https://music.91q.com/) is an online music platform offering a large library of songs, popular playlists, artist content, and curated videos.
@@ -475,22 +468,67 @@ QianqianMusicClient comes ready to use without relying on additional CLI tools l
 
 - Simple usage for searching and downloading songs, with login cookies:
 
+  `musicdl -m QianqianMusicClient -i "{'QianqianMusicClient': {'default_search_cookies': 'YOUR_COOKIES'}}"`
+
 - Basic usage for playlist parsing and downloading, without login cookies:
 
+  `musicdl -p "https://music.91q.com/songlist/309421" -m QianqianMusicClient`
+
 - Simple usage for playlist parsing and downloading, with login cookies:
+
+  `musicdl -p "https://music.91q.com/songlist/309421" -m QianqianMusicClient -i "{'QianqianMusicClient': {'default_parse_cookies': 'YOUR_COOKIES'}}"`
 
 (2) Invoke It in Python
 
 - Basic usage for song search and download, without login cookies:
 
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['QianqianMusicClient'])
+  music_client.startcmdui()
+  ```
+
 - Simple usage for searching and downloading songs, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'QianqianMusicClient': {
+        'default_search_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['QianqianMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  music_client.startcmdui()
+  ```
 
 - Basic usage for playlist parsing and downloading, without login cookies:
 
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['QianqianMusicClient'])
+  song_infos = music_client.parseplaylist("https://music.91q.com/songlist/309421")
+  music_client.download(song_infos=song_infos)
+  ```
+
 - Simple usage for playlist parsing and downloading, with login cookies:
 
-
-
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'QianqianMusicClient': {
+        'default_parse_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['QianqianMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  song_infos = music_client.parseplaylist("https://music.91q.com/songlist/309421")
+  music_client.download(song_infos=song_infos)
+  ```
 
 #### QQMusicClient (Built-in Premium Account)
 
@@ -508,26 +546,71 @@ To use QQMusicClient, you do not need any extra command-line tools such as ffmpe
 
 - Simple usage for searching and downloading songs, with login cookies:
 
+  `musicdl -m QQMusicClient -i "{'QQMusicClient': {'default_search_cookies': 'YOUR_COOKIES'}}"`
+
 - Basic usage for playlist parsing and downloading, without login cookies:
 
+  `musicdl -p "https://y.qq.com/n/ryqq_v2/playlist/8740590963" -m QQMusicClient`
+
 - Simple usage for playlist parsing and downloading, with login cookies:
+
+  `musicdl -p "https://y.qq.com/n/ryqq_v2/playlist/8740590963" -m QQMusicClient -i "{'QQMusicClient': {'default_parse_cookies': 'YOUR_COOKIES'}}"`
 
 (2) Invoke It in Python
 
 - Basic usage for song search and download, without login cookies:
 
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['QQMusicClient'])
+  music_client.startcmdui()
+  ```
+
 - Simple usage for searching and downloading songs, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'QQMusicClient': {
+        'default_search_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['QQMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  music_client.startcmdui()
+  ```
 
 - Basic usage for playlist parsing and downloading, without login cookies:
 
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['QQMusicClient'])
+  song_infos = music_client.parseplaylist("https://y.qq.com/n/ryqq_v2/playlist/8740590963")
+  music_client.download(song_infos=song_infos)
+  ```
+
 - Simple usage for playlist parsing and downloading, with login cookies:
 
-
-
-
-
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'QQMusicClient': {
+        'default_parse_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['QQMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  song_infos = music_client.parseplaylist("https://y.qq.com/n/ryqq_v2/playlist/8740590963")
+  music_client.download(song_infos=song_infos)
+  ```
 
 #### SodaMusicClient
+
+
 
 We can use SodaMusicClient for downloading the music above.
 
@@ -564,6 +647,35 @@ SodaMusicClient offers an out-of-the-box experience: no extra CLI tools like ffm
 
 
 #### StreetVoiceMusicClient
+
+(1) Command-Line Usage
+
+- Basic usage for song search and download, without login cookies:
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+- Basic usage for playlist parsing and downloading, without login cookies:
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+(2) Invoke It in Python
+
+- Basic usage for song search and download, without login cookies:
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+- Basic usage for playlist parsing and downloading, without login cookies:
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+
+
+
+
+
+
+
+
 
 
 
