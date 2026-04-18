@@ -1259,7 +1259,7 @@ MP3JuiceMusicClient doesn’t rely on external CLI tools like ffmpeg or N_m3u8DL
 
 [MyFreeMP3](https://www.myfreemp3.com.cn/) is a free online music search and download site that lets users look up songs from multiple sources and download high-quality audio through a simple web interface.
 
-If you want to download music from the platform above, MyFreeMP3MusicClient is the client to use.
+If you're looking to download music from the aforementioned platform, MyFreeMP3MusicClient is the way to go.
 
 The table below outlines the music platforms currently supported by MyFreeMP3MusicClient through MyFreeMP3,
 
