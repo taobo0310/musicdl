@@ -772,7 +772,11 @@ Since StreetVoice audio files are delivered in HLS format, downloading music fro
 
 Music available on the platform above can be retrieved by means of AppleMusicClient.
 
+To use AppleMusicClient, you will need extra CLI tools such as [FFmpeg](https://www.ffmpeg.org/), [N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE/releases/tag/v0.5.1-beta), [Bento4](https://www.bento4.com/) and [amdecrypt](https://github.com/CharlesPikachu/musicdl/releases/tag/clitools), in addition to musicdl.
 
+(1) Command-Line Usage
+
+(2) Invoke It in Python
 
 #### DeezerMusicClient
 
@@ -780,8 +784,11 @@ Music available on the platform above can be retrieved by means of AppleMusicCli
 
 Songs hosted on the platform above can be accessed using DeezerMusicClient.
 
+DeezerMusicClient comes with no extra CLI tool requirements such as ffmpeg or N_m3u8DL-RE, and only musicdl needs to be installed.
 
+(1) Command-Line Usage
 
+(2) Invoke It in Python
 
 #### JamendoMusicClient
 
@@ -791,7 +798,9 @@ JamendoMusicClient supports fetching music from the platform noted above.
 
 JamendoMusicClient requires only a pip installation of musicdl, with no additional setup for tools like ffmpeg or N_m3u8DL-RE.
 
+(1) Command-Line Usage
 
+(2) Invoke It in Python
 
 
 #### JooxMusicClient
@@ -802,6 +811,9 @@ JooxMusicClient allows you to obtain music from the platform referenced above.
 
 With JooxMusicClient, there is no extra dependency on CLI tools such as ffmpeg or N_m3u8DL-RE. Just install musicdl and you are ready to go.
 
+(1) Command-Line Usage
+
+(2) Invoke It in Python
 
 
 #### QobuzMusicClient (Built-in Premium Account)
@@ -810,12 +822,34 @@ With JooxMusicClient, there is no extra dependency on CLI tools such as ffmpeg o
 
 Music from the platform referenced above can be fetched through QobuzMusicClient.
 
+With QobuzMusicClient, you do not need extra CLI tools like ffmpeg or N_m3u8DL-RE. A simple musicdl installation is sufficient.
+
+(1) Command-Line Usage
+
+(2) Invoke It in Python
+
 
 #### SoundCloudMusicClient
 
 [SoundCloud](https://soundcloud.com/discover) is a music streaming and sharing platform where users can discover tracks, playlists, and podcasts, while artists can upload and share their work with listeners worldwide.
 
 Songs offered by the platform above can be retrieved through SoundCloudMusicClient.
+
+To use SoundCloudMusicClient, you will need a few extra CLI tools, including [FFmpeg](https://www.ffmpeg.org/), [N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE/releases/tag/v0.5.1-beta), and [Bento4](https://www.bento4.com/). After installing them together with musicdl, you are ready to go.
+
+(1) Command-Line Usage
+
+- Basic usage for song search and download, without login cookies:
+
+  `musicdl -m SoundCloudMusicClient`
+
+- Basic usage for playlist parsing and downloading, without login cookies:
+
+  `musicdl -p "https://soundcloud.com/raudymithut/sets/sets-from-dj-raudy-mit-hut" -m SoundCloudMusicClient`
+
+(2) Invoke It in Python
+
+
 
 
 #### SpotifyMusicClient (Built-in Premium Account)
@@ -824,8 +858,38 @@ Songs offered by the platform above can be retrieved through SoundCloudMusicClie
 
 SpotifyMusicClient allows users to pull music from the platform referred to above.
 
+SpotifyMusicClient works out of the box with just musicdl installed, without requiring extra CLI tools like ffmpeg or N_m3u8DL-RE.
 
+(1) Command-Line Usage
 
+- Basic usage for song search and download, without login cookies:
+
+  `musicdl -m SpotifyMusicClient`
+
+- Basic usage for playlist parsing and downloading, without login cookies:
+
+  `musicdl -p "https://open.spotify.com/playlist/36S7vjbqxUnzEGg9pBJ6p3" -m SpotifyMusicClient`
+
+(2) Invoke It in Python
+
+- Basic usage for song search and download, without login cookies:
+
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['SpotifyMusicClient'])
+  music_client.startcmdui()
+  ```
+
+- Basic usage for playlist parsing and downloading, without login cookies:
+
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['SpotifyMusicClient'])
+  song_infos = music_client.parseplaylist("https://open.spotify.com/playlist/36S7vjbqxUnzEGg9pBJ6p3")
+  music_client.download(song_infos=song_infos)
+  ```
 
 #### TIDALMusicClient (Built-in Premium Account)
 
