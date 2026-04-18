@@ -770,43 +770,148 @@ Since StreetVoice audio files are delivered in HLS format, downloading music fro
 
 [Apple Music](https://music.apple.com/) is Apple’s music streaming platform, offering songs, albums, playlists, radio, and other audio content through its web player and apps.
 
+Music available on the platform above can be retrieved by means of AppleMusicClient.
+
+
+
 #### DeezerMusicClient
 
 [Deezer](https://www.deezer.com/us/) is a music streaming platform that lets users listen to over 120 million tracks, podcasts, playlists, and other audio content online.
+
+Songs hosted on the platform above can be accessed using DeezerMusicClient.
+
+
+
 
 #### JamendoMusicClient
 
 [Jamendo](https://www.jamendo.com/) is a music platform that offers free music streaming and downloads, with a focus on independent artists and royalty-free music.
 
-
+JamendoMusicClient supports fetching music from the platform noted above.
 
 JamendoMusicClient requires only a pip installation of musicdl, with no additional setup for tools like ffmpeg or N_m3u8DL-RE.
+
+
+
 
 #### JooxMusicClient
 
 [JOOX](https://www.joox.com/intl) is a music streaming platform by Tencent that offers over 40 million songs, playlists, karaoke, live broadcasting, and social audio features.
 
+JooxMusicClient allows you to obtain music from the platform referenced above.
+
 With JooxMusicClient, there is no extra dependency on CLI tools such as ffmpeg or N_m3u8DL-RE. Just install musicdl and you are ready to go.
+
+
 
 #### QobuzMusicClient (Built-in Premium Account)
 
 [Qobuz](https://play.qobuz.com/discover) is a high-resolution music streaming and download platform that offers more than 100 million tracks in CD-quality and Hi-Res audio for music listening and discovery.
 
+Music from the platform referenced above can be fetched through QobuzMusicClient.
+
+
 #### SoundCloudMusicClient
 
 [SoundCloud](https://soundcloud.com/discover) is a music streaming and sharing platform where users can discover tracks, playlists, and podcasts, while artists can upload and share their work with listeners worldwide.
+
+Songs offered by the platform above can be retrieved through SoundCloudMusicClient.
+
 
 #### SpotifyMusicClient (Built-in Premium Account)
 
 [Spotify](https://open.spotify.com/) is a global audio streaming platform where users can listen to music, podcasts, and playlists through its web player and apps.
 
+SpotifyMusicClient allows users to pull music from the platform referred to above.
+
+
+
+
 #### TIDALMusicClient (Built-in Premium Account)
 
 [TIDAL](https://tidal.com/) is a music streaming platform that offers millions of tracks, albums, playlists, and videos, with a focus on high-fidelity audio quality.
 
+TIDALMusicClient is designed to fetch music from the platform referenced above.
+
+With TIDALMusicClient, additional CLI tools such as [FFmpeg](https://www.ffmpeg.org/), [N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE/releases/tag/v0.5.1-beta), and [Bento4](https://www.bento4.com/) are required to perform audio decryption.
+
+(1) Command-Line Usage
+
+- Basic usage for song search and download, with login cookies:
+
+  Unlike other music clients that come with built-in membership accounts, TIDALMusicClient requires cookies from your own account. 
+  However, because a membership account is already built in, the account used to obtain the cookies does not need to be a paid subscription account, cookies from a normally registered free account are enough.
+  
+  To make sure your account cookies meet musicdl’s requirements, we recommend using the [build_cookies_for_tidal.py](https://github.com/CharlesPikachu/musicdl/blob/master/scripts/build_cookies_for_tidal.py) script included in the repository to obtain the cookies needed by musicdl. 
+  The generated cookies will look roughly as follows:
+  
+  `{"access_token": "xxx", "refresh_token": "xxx", "expires": "2026-02-10T07:32:18.102233", "user_id": xxx, "country_code": "SG", "client_id": "7m7Ap0JC9j1cOM3n", "client_secret": "vRAdA108tlvkJpTsGZS8rGZ7xTlbJ0qaZ2K9saEzsgY="}`
+  
+  After that, you can simply provide the membership cookies in the same way as with other music clients:
+  
+  `musicdl -m TIDALMusicClient -i "{'TIDALMusicClient': {'default_search_cookies': 'YOUR_COOKIES'}}"`
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+  `musicdl -p "https://tidal.com/playlist/7aa5d764-192f-45cb-ab9b-3692975e1f88" -m TIDALMusicClient -i "{'TIDALMusicClient': {'default_parse_cookies': 'YOUR_COOKIES'}}"`
+
+(2) Invoke It in Python
+
+- Basic usage for song search and download, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'TIDALMusicClient': {
+        'default_search_cookies': your_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['TIDALMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  music_client.startcmdui()
+  ```
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'TIDALMusicClient': {
+        'default_parse_cookies': your_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['TIDALMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  song_infos = music_client.parseplaylist("https://tidal.com/playlist/7aa5d764-192f-45cb-ab9b-3692975e1f88")
+  music_client.download(song_infos=song_infos)
+  ```
+
 #### YouTubeMusicClient (Built-in Premium Account)
 
 [YouTube Music](https://music.youtube.com/) is Google’s music streaming platform, offering access to over 100 million songs, albums, playlists, remixes, and music videos for listening and discovery.
+
+The retrieval of music from the aforementioned platform can be handled by YouTubeMusicClient.
+
+YouTubeMusicClient comes with an extra dependency on [Node.js](https://nodejs.org/en), so a separate [Node.js installation](https://nodejs.org/en/download) is required before use.
+
+(1) Command-Line Usage
+
+- Basic usage for song search and download, without login cookies:
+
+  `musicdl -m YouTubeMusicClient`
+
+(2) Invoke It in Python
+
+- Basic usage for song search and download, without login cookies:
+
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['YouTubeMusicClient'])
+  music_client.startcmdui()
+  ```
 
 ## Audio / Radio
 
