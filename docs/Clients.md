@@ -778,6 +778,8 @@ Since StreetVoice audio files are delivered in HLS format, downloading music fro
 
 [Jamendo](https://www.jamendo.com/) is a music platform that offers free music streaming and downloads, with a focus on independent artists and royalty-free music.
 
+
+
 JamendoMusicClient requires only a pip installation of musicdl, with no additional setup for tools like ffmpeg or N_m3u8DL-RE.
 
 #### JooxMusicClient
@@ -1769,6 +1771,10 @@ TwoT58MusicClient is designed for hassle-free use: no additional CLI tools like 
 
   `musicdl -m TwoT58MusicClient`
 
+- If It Fails, Try Capturing and Adding the Website’s Cookies
+
+  `musicdl -m TwoT58MusicClient -i "{'TwoT58MusicClient': {'default_search_cookies': 'Hm_tf_hx9umupwu8o=1766942296; 9be49c0fcbd87e6a36f944af3f638e63=701e0362d41fe970a431ab4e7e0a8260; server_name_session=8e658a40df8491e40010dc3307caacde; Hm_lvt_hx9umupwu8o=1775811750,1776490879; Hm_lpvt_hx9umupwu8o=1776492031'}}"`
+
 (2) Invoke It in Python
 
 - Search for and Download Playable Music Files from Websites
@@ -1777,6 +1783,21 @@ TwoT58MusicClient is designed for hassle-free use: no additional CLI tools like 
   from musicdl import musicdl
 
   music_client = musicdl.MusicClient(music_sources=['TwoT58MusicClient'])
+  music_client.startcmdui()
+  ```
+
+- If It Fails, Try Capturing and Adding the Website’s Cookies
+
+  ```python
+  from musicdl import musicdl
+  
+  cookies_with_str_or_dict_format = 'Hm_tf_hx9umupwu8o=1766942296; 9be49c0fcbd87e6a36f944af3f638e63=701e0362d41fe970a431ab4e7e0a8260; server_name_session=8e658a40df8491e40010dc3307caacde; Hm_lvt_hx9umupwu8o=1775811750,1776490879; Hm_lpvt_hx9umupwu8o=1776492031'
+  init_music_clients_cfg = {
+    'TwoT58MusicClient': {
+        'default_search_cookies': cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['TwoT58MusicClient'], init_music_clients_cfg=init_music_clients_cfg)
   music_client.startcmdui()
   ```
 
