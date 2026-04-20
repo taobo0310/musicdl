@@ -860,10 +860,6 @@ DeezerMusicClient comes with no extra CLI tool requirements such as ffmpeg or N_
   Configured cookies must include the "arl" field, for example `{'arl': xxx, ...}` or `arl=xxx; ...`.
   In addition, if the account cookies you provide are not from a Deezer Premium subscriber, you will only be able to download songs at 128 kbps.
 
-- Basic usage for playlist parsing and downloading, without login cookies:
-
-  `musicdl -p "https://www.deezer.com/en/playlist/1286555965" -m DeezerMusicClient`
-
 - Simple usage for playlist parsing and downloading, with login cookies:
 
   `musicdl -p "https://www.deezer.com/en/playlist/1286555965" -m DeezerMusicClient -i "{'DeezerMusicClient': {'default_parse_cookies': 'YOUR_COOKIES'}}"`
@@ -892,16 +888,6 @@ DeezerMusicClient comes with no extra CLI tool requirements such as ffmpeg or N_
   }
   music_client = musicdl.MusicClient(music_sources=['DeezerMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
   music_client.startcmdui()
-  ```
-
-- Basic usage for playlist parsing and downloading, without login cookies:
-
-  ```python
-  from musicdl import musicdl
-
-  music_client = musicdl.MusicClient(music_sources=['DeezerMusicClient'])
-  song_infos = music_client.parseplaylist("https://www.deezer.com/en/playlist/1286555965")
-  music_client.download(song_infos=song_infos)
   ```
 
 - Simple usage for playlist parsing and downloading, with login cookies:
