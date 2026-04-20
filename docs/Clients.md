@@ -776,7 +776,64 @@ To use AppleMusicClient, you will need extra CLI tools such as [FFmpeg](https://
 
 (1) Command-Line Usage
 
+- Basic usage for song search and download, without login cookies:
+
+  `musicdl -m AppleMusicClient`
+  
+  Please note that if you do not configure your Apple Music subscriber account cookies, AppleMusicClient will only be able to download 30–90 second preview clips rather than the full tracks.
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+  `musicdl -m AppleMusicClient -i "{'AppleMusicClient': {'default_search_cookies': 'YOUR_COOKIES'}}"`
+  
+  A few important things to keep in mind:
+  
+  - The cookies you provide must include the `media-user-token` field, for example: `{'media-user-token': 'xxx'}`.
+  - In this case, you only need to make sure [FFmpeg](https://www.ffmpeg.org/) and [N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE/releases/tag/v0.5.1-beta) are installed.
+  - musicdl currently supports downloading Apple Music tracks in the following audio formats/quality variants:
+    - `aac-legacy`
+    - `aac-he-legacy`
+    - `aac`
+    - `aac-he`
+    - `aac-binaural`
+    - `aac-downmix`
+    - `aac-he-binaural`
+    - `aac-he-downmix`
+    - `atmos`
+    - `ac3`
+    - `alac`
+    However, if you are downloading with subscriber cookies alone, the highest quality currently available is `aac-legacy`.
+
+- Using the wrapper server to search for and download songs:
+
+
+
 (2) Invoke It in Python
+
+- Basic usage for song search and download, without login cookies:
+
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['AppleMusicClient'])
+  music_client.startcmdui()
+  ```
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  from musicdl.modules.sources.apple import SongCodec
+
+  cookies = {'media-user-token': 'xxx'}
+  init_music_clients_cfg = {'AppleMusicClient': {'default_search_cookies': cookies, 'search_size_per_source': 10, 'language': 'en-US', 'codec': SongCodec.AAC_LEGACY}}
+  music_client = musicdl.MusicClient(music_sources=['AppleMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  music_client.startcmdui()
+  ```
+
+- Using the wrapper server to search for and download songs:
+
+
 
 #### DeezerMusicClient
 
