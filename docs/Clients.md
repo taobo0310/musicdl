@@ -791,6 +791,7 @@ To use AppleMusicClient, you will need extra CLI tools such as [FFmpeg](https://
   - The cookies you provide must include the `media-user-token` field, for example: `{'media-user-token': 'xxx'}`.
   - In this case, you only need to make sure [FFmpeg](https://www.ffmpeg.org/) and [N_m3u8DL-RE](https://github.com/nilaoda/N_m3u8DL-RE/releases/tag/v0.5.1-beta) are installed.
   - musicdl currently supports downloading Apple Music tracks in the following audio formats/quality variants:
+  
     - `aac-legacy`
     - `aac-he-legacy`
     - `aac`
@@ -802,6 +803,7 @@ To use AppleMusicClient, you will need extra CLI tools such as [FFmpeg](https://
     - `atmos`
     - `ac3`
     - `alac`
+	
     However, if you are downloading with subscriber cookies alone, the highest quality currently available is `aac-legacy`.
 
 - Using the wrapper server to search for and download songs:
