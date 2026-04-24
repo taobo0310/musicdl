@@ -341,6 +341,7 @@ End users usually do not create this class directly. Instead, they use subclasse
 - `musicdl.modules.sources.BilibiliMusicClient`
 - `musicdl.modules.sources.DeezerMusicClient`
 - `musicdl.modules.sources.FiveSingMusicClient`
+- `musicdl.modules.sources.FMAMusicClient`
 - `musicdl.modules.sources.JamendoMusicClient`
 - `musicdl.modules.sources.JooxMusicClient`
 - `musicdl.modules.sources.KugouMusicClient`

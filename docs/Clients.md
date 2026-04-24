@@ -955,6 +955,70 @@ DeezerMusicClient comes with no extra CLI tool requirements such as ffmpeg or N_
   music_client.download(song_infos=song_infos)
   ```
 
+#### FMAMusicClient
+
+[Free Music Archive (FMA)](https://freemusicarchive.org/) is a curated online library offering free, legal access to independent music that users can play, download, and share.
+
+FMAMusicClient provides access to the songs available on the platform mentioned above.
+
+FMAMusicClient works out of the box without relying on external CLI dependencies like ffmpeg or N_m3u8DL-RE, installing musicdl is sufficient.
+
+(1) Command-Line Usage
+
+- Basic usage for song search and download, without login cookies:
+  
+  `musicdl -m FMAMusicClient`
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+  `musicdl -m FMAMusicClient -i "{'FMAMusicClient': {'default_search_cookies': 'YOUR_COOKIES'}}"`
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+  `musicdl -p "https://freemusicarchive.org/member/meghan-admin/meet-policy-mix/" -m FMAMusicClient -i "{'FMAMusicClient': {'default_parse_cookies': 'YOUR_COOKIES'}}"`
+
+(2) Invoke It in Python
+
+- Basic usage for song search and download, without login cookies:
+
+  ```python
+  from musicdl import musicdl
+
+  music_client = musicdl.MusicClient(music_sources=['FMAMusicClient'])
+  music_client.startcmdui()
+  ```
+
+- Simple usage for searching and downloading songs, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'FMAMusicClient': {
+        'default_search_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['FMAMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  music_client.startcmdui()
+  ```
+
+- Simple usage for playlist parsing and downloading, with login cookies:
+
+  ```python
+  from musicdl import musicdl
+  
+  your_vip_cookies_with_str_or_dict_format = ''
+  init_music_clients_cfg = {
+    'FMAMusicClient': {
+        'default_parse_cookies': your_vip_cookies_with_str_or_dict_format,
+    }
+  }
+  music_client = musicdl.MusicClient(music_sources=['FMAMusicClient'], init_music_clients_cfg=init_music_clients_cfg)
+  song_infos = music_client.parseplaylist("https://freemusicarchive.org/member/meghan-admin/meet-policy-mix/")
+  music_client.download(song_infos=song_infos)
+  ```
+
 #### JamendoMusicClient
 
 [Jamendo](https://www.jamendo.com/) is a music platform that offers free music streaming and downloads, with a focus on independent artists and royalty-free music.
